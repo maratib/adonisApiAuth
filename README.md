@@ -9,7 +9,7 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 5. Migrations and seeds
 6. Validator
 7. Lucid Filters
-8. Sqlite3
+8. MySQL
 
 ## Setup
 
