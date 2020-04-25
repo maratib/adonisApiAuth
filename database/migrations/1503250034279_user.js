@@ -10,6 +10,7 @@ class UserSchema extends Schema {
       table.string('name', 80).notNullable().unique();
       table.string('email', 254).notNullable().unique();
       table.string('password', 60).notNullable();
+      table.boolean('dark').defaultTo(true);
       table.boolean('admin').defaultTo(false);
       table.boolean('agent').defaultTo(false);
       table.timestamps();

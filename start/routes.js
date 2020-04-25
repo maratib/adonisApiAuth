@@ -35,8 +35,7 @@ Route.group(() => {
   Route.post('login', 'AuthController.login');
   Route.delete('logout', 'AuthController.logout');
   Route.post('register', 'AuthController.register');
-
-
+  Route.post('update', 'AuthController.update').middleware(['auth']);
 
   Route.get('me', 'AuthController.me').middleware(['auth']);
 

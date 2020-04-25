@@ -57,6 +57,21 @@ class AuthController {
     }
   }
 
+  async update({auth, request, response}) {
+    const { dark, password } = request.only(['dark', 'password']);
+    let user = await User.find(auth.user.id);
+    if (user.dark != dark) {
+      console.log('Changgeddd ');
+      
+      user.dark = dark;
+      await user.save();
+    }
+    console.log(user.name);
+    console.log(dark);
+    
+    
+  }
+
   async logout({ auth, response }) {
     try {
       const token = await auth.logout();
@@ -74,6 +89,7 @@ class AuthController {
   }
 
   async me({ auth, response }) {
+    // auth.user.dark = auth.user.dark?true:false;
     return response.json({
       status: 'success',
       data: auth.user
