@@ -25,6 +25,18 @@ Factory.blueprint('App/Models/User', async (faker, i, data) => {
     };
 });
 
+Factory.blueprint('App/Models/Page', async (faker, i, data) => {
+  return {
+    
+    name: ['about', 'terms', 'privacy', 'contact'][i],
+    lang: 'de',
+    title: ['About us', 'Terms of use', 'Privacy Policy', 'Contact us'][i],
+    body: faker.paragraph(),
+    active: true
+  };
+});
+
+
 Factory.blueprint('App/Models/Blog', async (faker, i, data) => {
     return {
       lang: 'en',

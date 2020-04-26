@@ -21,6 +21,9 @@ Route.get('/', () => {
 });
 
 Route.group(() => {
+
+  // Test routes
+  
   
   // FAQ routes
   Route.get('faq', 'FaqController.index');
@@ -29,6 +32,10 @@ Route.group(() => {
   // Blog routes
   Route.get('blog', 'BlogController.index');
   Route.post('blog', 'BlogController.create');
+
+  // Page routes
+  Route.get('page', 'PageController.index');
+  Route.post('blog', 'PageController.create');
 
   // Auth routes
   Route.get('/', 'AuthController.index');
