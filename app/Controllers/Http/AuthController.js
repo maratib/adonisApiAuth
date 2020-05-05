@@ -8,8 +8,6 @@ class AuthController {
   }
   async register({ request, auth, response }) {
     const userData = request.only(['name', 'email', 'password']);
-    console.log(userData);
-
 
     try {
       const user = await User.create(userData);
@@ -21,8 +19,6 @@ class AuthController {
         data: token
       });
     } catch (error) {
-      console.log(error);
-
       return response.status(400).json({
         status: 'error',
         message: 'There was a problem creating the user, please try again later.'
@@ -31,19 +27,11 @@ class AuthController {
   }
 
   async login({ request, auth, response }) {
-    console.log('In login');
 
     const { email, password } = request.only(['email', 'password']);
     try {
 
-      console.log(email);
-      console.log(password);
-
       const token = await auth.attempt(email, password);
-      console.log(token);
-
-      console.log('Login attempt');
-
 
       return response.json({
         status: 'success',
@@ -57,28 +45,31 @@ class AuthController {
     }
   }
 
-  async update({auth, request, response}) {
+  async update({ auth, request, response }) {
     const { dark, password } = request.only(['dark', 'password']);
     let user = await User.find(auth.user.id);
     if (user.dark != dark) {
-      console.log('Changgeddd ');
-      
       user.dark = dark;
-      await user.save();
+      try {
+        await user.save();
+        return response.json({
+          status: 'success'
+        });
+      } catch (error) {
+        response.status(400).json({
+          status: 'error',
+          message: 'Inable to save data.'
+        });
+      }
     }
-    console.log(user.name);
-    console.log(dark);
-    
-    
+
   }
 
   async logout({ auth, response }) {
     try {
       const token = await auth.logout();
-      console.log('Logout attempt');
       return response.json({
-        status: 'success',
-        data: ''
+        status: 'success'
       });
     } catch (error) {
       response.status(400).json({
@@ -89,7 +80,6 @@ class AuthController {
   }
 
   async me({ auth, response }) {
-    // auth.user.dark = auth.user.dark?true:false;
     return response.json({
       status: 'success',
       data: auth.user
