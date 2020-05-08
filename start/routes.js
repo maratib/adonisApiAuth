@@ -39,12 +39,13 @@ Route.group(() => {
 
   // Auth routes
   Route.get('/', 'AuthController.index');
-  Route.post('login', 'AuthController.login');
-  Route.delete('logout', 'AuthController.logout');
-  Route.post('register', 'AuthController.register');
-  Route.post('update', 'AuthController.update').middleware(['auth']);
+  Route.post('auth/login', 'AuthController.login');
+  
+  Route.post('auth/register', 'AuthController.register');
 
+  Route.post('auth/update', 'AuthController.update').middleware(['auth']);
   Route.get('me', 'AuthController.me').middleware(['auth']);
+  Route.delete('auth/logout', 'AuthController.logout').middleware(['auth']);
 
 
 }).prefix('api');

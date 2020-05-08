@@ -1,6 +1,8 @@
 'use strict';
 
 const User = use('App/Models/User');
+const BadRequestException = use('App/Exceptions/BadRequestException');
+const Logger = use('Logger');
 
 class AuthController {
   async index(request, response) {
@@ -67,14 +69,24 @@ class AuthController {
 
   async logout({ auth, response }) {
     try {
-      const token = await auth.logout();
+      const refreshToken = auth.getAuthHeader();
+      Logger.warning('loggin info %s', 'ABC');
+      
+
+      
+      if (!refreshToken) {
+        throw BadRequestException.invoke('Refresh token is missing');
+      }
+
+      await auth.authenticator('jwt').revokeTokens([refreshToken], true);
+      // const token = await auth.logout();
       return response.json({
         status: 'success'
       });
     } catch (error) {
       response.status(400).json({
         status: 'error',
-        message: 'Logging out'
+        message: 'Logging out ' + error.toString()
       });
     }
   }

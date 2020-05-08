@@ -24,7 +24,7 @@ class FaqController {
       const lang = request.input('l', 'de');
 
       const page = await Faq.query().select('title', 'body').where('lang', lang)
-        .orderBy('updated_at', 'desc').paginate(currnet_page, total_per_page);
+        .orderBy('created_at', 'desc').paginate(currnet_page, total_per_page);
       if (page !== null) return page;
       return { title: '', body: '' };
     } catch (error) {
@@ -61,6 +61,29 @@ class FaqController {
     }
 
   }
-}
 
+  async update({ request, auth, response }) {
+    const sanitizationRules = {
+      _id : 'to_int',
+      lang: 'escape',
+      title: 'escape',
+      body: 'escape'
+    };
+    const nparam = request.only(['_id', 'lang', 'title', 'body']);
+    const params = Validator.sanitize(nparam, sanitizationRules);
+    console.log(params);
+    try {
+      const data = await Faq.create(params);
+      return response.json({ status: 'success' });
+    } catch (error) {
+      console.log(error);
+      return response.status(400).json({
+        status: 'error',
+        message: 'Problem inserting data, please try again later.'
+      });
+    }
+  
+  }
+
+}
 module.exports = FaqController;;;
