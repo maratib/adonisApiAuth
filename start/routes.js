@@ -40,13 +40,11 @@ Route.group(() => {
   // Auth routes
   Route.get('/', 'AuthController.index');
   Route.post('auth/login', 'AuthController.login');
-  
   Route.post('auth/register', 'AuthController.register');
 
   Route.post('auth/update', 'AuthController.update').middleware(['auth']);
-  Route.get('me', 'AuthController.me').middleware(['auth']);
+  Route.get('auth/me', 'AuthController.me').middleware(['auth']);
   Route.delete('auth/logout', 'AuthController.logout').middleware(['auth']);
-
 
 }).prefix('api');
 

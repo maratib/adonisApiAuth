@@ -70,7 +70,7 @@ class AuthController {
   async logout({ auth, response }) {
     try {
       const refreshToken = auth.getAuthHeader();
-      Logger.warning('loggin info %s', 'ABC');
+      Logger.info('logging %s', 'OUT');
       
 
       

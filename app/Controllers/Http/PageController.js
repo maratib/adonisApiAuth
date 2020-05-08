@@ -13,7 +13,7 @@ class PageController {
         else {
             const page = await Page.query().select('title', 'body').where('name', pageData.page).first();
             if (page !== null) return page;
-            return { title: '', body: '' };
+            return { title: 'Page not found', body: '' };
         }
 
 
