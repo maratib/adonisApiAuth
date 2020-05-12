@@ -32,6 +32,9 @@ Route.group(() => {
   // Blog routes
   Route.get('blog', 'BlogController.index');
   Route.post('blog', 'BlogController.create');
+  Route.get('blog/edit', 'BlogController.edit');
+  Route.post('blog/update', 'BlogController.update').middleware(['auth']);
+  Route.delete('blog/delete', 'BlogController.delete').middleware(['auth']);
 
   // Page routes
   Route.get('page', 'PageController.index');
