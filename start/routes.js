@@ -31,14 +31,21 @@ Route.group(() => {
 
   // Blog routes
   Route.get('blog', 'BlogController.index');
-  Route.post('blog', 'BlogController.create');
+  Route.post('blog', 'BlogController.create').middleware(['auth']);
   Route.get('blog/edit', 'BlogController.edit');
   Route.post('blog/update', 'BlogController.update').middleware(['auth']);
   Route.delete('blog/delete', 'BlogController.delete').middleware(['auth']);
 
   // Page routes
+  // Route.get('page', 'PageController.index');
+  // Route.post('blog', 'PageController.create');
   Route.get('page', 'PageController.index');
-  Route.post('blog', 'PageController.create');
+  Route.get('page/list', 'PageController.list');
+  Route.post('page', 'PageController.create').middleware(['auth']);
+  Route.get('page/edit', 'PageController.edit');
+  Route.post('page/update', 'PageController.update').middleware(['auth']);
+  Route.delete('page/delete', 'PageController.delete').middleware(['auth']);
+
 
   // Auth routes
   Route.get('/', 'AuthController.index');

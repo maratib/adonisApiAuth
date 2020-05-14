@@ -57,19 +57,6 @@ class BlogController {
     }
   }
 
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  async usingAwait(ms) {
-    // await sleep(5000);
-    console.log('Using Await');
-    return new Promise(resolve => setTimeout(resolve, ms));
-
-  }
-
-
-
   async create({ request, auth, response }) {
     const blogData = request.only(['lang', 'title', 'body']);
     console.log(blogData);
