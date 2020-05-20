@@ -39,7 +39,7 @@ Factory.blueprint('App/Models/Page', async (faker, i, data) => {
 
 Factory.blueprint('App/Models/Blog', async (faker, i, data) => {
     return {
-      lang: 'en',
+      lang: 'de',
       title: faker.sentence(),
       body: faker.paragraph(),
       active: true
